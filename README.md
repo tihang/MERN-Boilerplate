@@ -1,5 +1,7 @@
 # MERN-Boilerplate :star:
 
+https://travis-ci.org/tihang/MERN-Boilerplate.svg?branch=master
+
 This is a boilerplate to build a full stack web application using React, Redux, Node.js, Express and Webpack. It is also configured with webpack-dev-server, eslint, prettier and babel.
 Extended from https://github.com/crsandeep/simple-react-full-stack
 

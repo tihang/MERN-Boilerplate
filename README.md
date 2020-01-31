@@ -28,7 +28,7 @@ yarn start (or npm start)
 ## .ENV variables
 
 ```bash
-#Include these environment variables in your .env file
+#Environment variables in your .env file
 MONGO_KEY = '~~Your MongoDB key~~'
 DB_NAME = '~~Your MongoDB database name~~'
 JWT_TOKEN_SECRET = '~~Jsonwebtoken secret~~'

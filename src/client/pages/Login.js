@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 import { userLogin } from '../redux';
 
-function Login({ login, isLoggedIn }) {
+function Login({ login, loggedIn }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  if (loggedIn) {
+    return <Redirect to="/dashboard" />;
+  }
+
   return (
     <div className="login-page">
       <h1>Login</h1>
@@ -30,18 +36,18 @@ function Login({ login, isLoggedIn }) {
         />
         <button type="submit">Login</button>
       </form>
-      <h3>{`Is logged in: ${isLoggedIn}`}</h3>
     </div>
   );
 }
 
+
 Login.propTypes = {
-  isLoggedIn: PropTypes.bool.isRequired,
+  loggedIn: PropTypes.bool.isRequired,
   login: PropTypes.func.isRequired
 };
 
 const mapStatetoProps = state => ({
-  isLoggedIn: state.user.loggedIn
+  loggedIn: state.user.loggedIn
 });
 
 const mapDispatchToProps = dispatch => ({

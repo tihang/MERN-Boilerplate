@@ -1,8 +1,11 @@
-import { USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGIN_FAILURE } from './userTypes';
+import {
+  USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS,
+  USER_LOGIN_FAILURE, USER_LOGOUT_REQUEST, USER_LOGOUT_SUCCESS
+} from './userTypes';
 
 const initialState = {
-  token: localStorage.getItem('auth-token'),
   loading: false,
+  token: localStorage.getItem('auth-token'),
   loggedIn: !!localStorage.getItem('auth-token'),
   sessionData: {},
   error: ''
@@ -30,6 +33,22 @@ const userReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: action.payload
+      };
+
+    case USER_LOGOUT_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+
+    case USER_LOGOUT_SUCCESS:
+      localStorage.removeItem('auth-token');
+      return {
+        ...state,
+        loading: false,
+        token: null,
+        loggedIn: false,
+        sessionData: {}
       };
 
     default:

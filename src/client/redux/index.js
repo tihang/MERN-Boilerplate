@@ -1,1 +1,1 @@
-export { userLogin } from './user/userActions';
+export { userLogin, userLogout } from './user/userActions';

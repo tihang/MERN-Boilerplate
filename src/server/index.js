@@ -10,7 +10,7 @@ const app = express();
 app.use(helmet());
 
 // Serve static contents
-app.use(express.static('dist'));
+app.use(express.static(path.join(`${__dirname}../../../dist`)));
 app.use(cors());
 app.use(express.json());
 

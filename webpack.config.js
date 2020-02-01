@@ -8,7 +8,8 @@ module.exports = {
   entry: ['babel-polyfill', './src/client/index.js'],
   output: {
     path: path.join(__dirname, outputDirectory),
-    filename: 'react-bundle.[hash].js'
+    filename: 'react-bundle.[hash].js',
+    publicPath: '/'
   },
   module: {
     rules: [

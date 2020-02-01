@@ -2,54 +2,52 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Icon from '../assets/icons/main.png';
+
 import { userLogout } from '../redux/index';
 
-function Nav({ loading, loggedIn, logout }) {
+function Nav({ loggedIn, logout }) {
   // Links for non authenticated users
   const guestLinks = () => (
-    <nav>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/login">Login</Link>
-        </li>
-      </ul>
-    </nav>
+    <ul>
+      <li><Link to="/"><img src={Icon} alt="ICON" /></Link></li>
+      <li>
+        <Link to="/">Home</Link>
+      </li>
+      <li>
+        <Link to="/login-register">Login/Register</Link>
+      </li>
+    </ul>
   );
 
   // Links for authenticated users
   const userLinks = () => (
-    <nav>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/dashboard">Dashboard</Link>
-        </li>
-        <li>
-          <button type="button" onClick={logout}>Logout</button>
-        </li>
-      </ul>
-    </nav>
+    <ul>
+      <li><Link to="/"><img src={Icon} alt="ICON" /></Link></li>
+      <li>
+        <Link to="/">Home</Link>
+      </li>
+      <li>
+        <Link to="/dashboard">Dashboard</Link>
+      </li>
+      <li>
+        <button type="button" onClick={logout}>Logout</button>
+      </li>
+    </ul>
+
   );
 
   return (
-    <div className="nav-container">
+    <nav className="nav-container">
       {/* Show user links based on their login status */}
       {loggedIn ? userLinks() : guestLinks()}
-      <h2>{`Loading: ${loading}`}</h2>
-      <h2>{`Logged IN : ${loggedIn}`}</h2>
-    </div>
+    </nav>
   );
 }
 
 // PropTypes validation
 Nav.propTypes = {
   loggedIn: PropTypes.bool.isRequired,
-  loading: PropTypes.bool.isRequired,
   logout: PropTypes.func.isRequired
 };
 

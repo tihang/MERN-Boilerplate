@@ -1,0 +1,92 @@
+$btn-color-success: #00c9a7;
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: AdineuePRO, Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-size: 40px;
+  line-height: 38px;
+}
+
+h3 {
+  font-size: 36px;
+  line-height: 32px;
+}
+
+h4 {
+  font-size: 30px;
+  line-height: 28px;
+}
+
+h5 {
+  font-size: 26px;
+  line-height: 22px;
+}
+
+h6 {
+  font-size: 20px;
+  line-height: 22px;
+}
+
+// FORM COMPONENTS
+
+/*Change text in autofill textbox*/
+input:-webkit-autofill {
+  -webkit-text-fill-color: $btn-color-success !important;
+}
+
+.form-component {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  input {
+    margin: auto;
+    width: 300px;
+    display: block;
+    padding: 12px;
+    margin: 18px 0;
+    border: none;
+    border-bottom: 2px solid black;
+    outline: none;
+    &:focus {
+      border-bottom: 2px solid $btn-color-success;
+      color: $btn-color-success;
+      font-size: 1.5rem;
+    }
+  }
+
+  .agreement-notice {
+    font-family: monospace;
+    letter-spacing: 0.4px;
+    width: 280px;
+    padding: 12px;
+    margin: 12px;
+  }
+}
+
+.form-btn {
+  background-color: white;
+  border: 1px solid $btn-color-success;
+  width: 260px;
+  height: 60px;
+  padding: 18px;
+  border-radius: 4px;
+  color: $btn-color-success;
+  font-weight: 600;
+  letter-spacing: 2px;
+  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}

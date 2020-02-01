@@ -1,0 +1,62 @@
+$primary-color: rgb(238, 238, 238);
+$secondary-color: #008e9b;
+* {
+  box-sizing: border-box;
+  font-size: 1.4rem;
+  font-family: AdineuePRO, Helvetica, Arial, sans-serif;
+  line-height: 30px;
+}
+
+body {
+  max-width: 1500px;
+  margin: auto;
+}
+
+// Navigation container
+.nav-container > ul {
+  list-style-type: none;
+  height: auto;
+  background-color: black;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: flex-end;
+  img {
+    filter: invert(48%) sepia(13%) saturate(3207%) hue-rotate(130deg)
+      brightness(95%) contrast(80%);
+    object-fit: scale-down;
+    width: 100px;
+    height: 100px;
+  }
+  li {
+    padding: 1.4em;
+    a {
+      font-size: 20px;
+      font-weight: 600;
+      color: white;
+      text-decoration: none;
+    }
+    &:first-child {
+      margin-right: auto;
+    }
+  }
+}
+
+// LOGIN PAGE
+.login-page {
+  text-align: center;
+  h5 {
+    padding-top: 24px;
+    line-height: 1.5em;
+    margin: 20px;
+  }
+  h6 {
+    padding-top: 24px;
+    margin: 30px;
+  }
+  button {
+    margin: auto;
+  }
+}

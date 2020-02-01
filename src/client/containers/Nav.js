@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Icon from '../assets/icons/main.png';
@@ -7,28 +7,28 @@ import Icon from '../assets/icons/main.png';
 import { userLogout } from '../redux/index';
 
 function Nav({ loggedIn, logout }) {
-  // Links for non authenticated users
-  const guestLinks = () => (
+  // NavLinks for non authenticated users
+  const guestNavLinks = () => (
     <ul>
-      <li><Link to="/"><img src={Icon} alt="ICON" /></Link></li>
+      <li><NavLink activeClassName="current" exact to="/"><img src={Icon} alt="ICON" /></NavLink></li>
       <li>
-        <Link to="/">Home</Link>
+        <NavLink activeClassName="current" exact to="/">Home</NavLink>
       </li>
       <li>
-        <Link to="/login-register">Login/Register</Link>
+        <NavLink activeClassName="current" exact to="/login-register">Login/Register</NavLink>
       </li>
     </ul>
   );
 
-  // Links for authenticated users
-  const userLinks = () => (
+  // NavLinks for authenticated users
+  const userNavLinks = () => (
     <ul>
-      <li><Link to="/"><img src={Icon} alt="ICON" /></Link></li>
+      <li><NavLink activeClassName="current" exact to="/"><img src={Icon} alt="ICON" /></NavLink></li>
       <li>
-        <Link to="/">Home</Link>
+        <NavLink activeClassName="current" exact to="/">Home</NavLink>
       </li>
       <li>
-        <Link to="/dashboard">Dashboard</Link>
+        <NavLink activeClassName="current" exact to="/dashboard">Dashboard</NavLink>
       </li>
       <li>
         <button type="button" onClick={logout}>Logout</button>
@@ -39,8 +39,8 @@ function Nav({ loggedIn, logout }) {
 
   return (
     <nav className="nav-container">
-      {/* Show user links based on their login status */}
-      {loggedIn ? userLinks() : guestLinks()}
+      {/* Show user NavLinks based on their login status */}
+      {loggedIn ? userNavLinks() : guestNavLinks()}
     </nav>
   );
 }

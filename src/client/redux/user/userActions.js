@@ -1,7 +1,13 @@
 import Axios from 'axios';
 import {
-  USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS,
-  USER_LOGIN_FAILURE, USER_LOGOUT_REQUEST, USER_LOGOUT_SUCCESS,
+  USER_LOGIN_REQUEST,
+  USER_LOGIN_SUCCESS,
+  USER_LOGIN_FAILURE,
+  USER_LOGOUT_REQUEST,
+  USER_LOGOUT_SUCCESS,
+  USER_REGSITER_REQUEST,
+  USER_REGISTER_SUCCESS,
+  USER_REGISTER_FAILURE
 } from './userTypes';
 
 export const userLoginRequest = () => ({
@@ -26,6 +32,19 @@ export const userLogoutSuccess = () => ({
   type: USER_LOGOUT_SUCCESS
 });
 
+export const userRegisterRequest = () => ({
+  type: USER_REGSITER_REQUEST
+});
+
+export const userRegisterSuccess = user => ({
+  type: USER_REGISTER_SUCCESS,
+  payload: user
+});
+
+export const userRegisterFailure = error => ({
+  type: USER_REGISTER_FAILURE,
+  payload: error
+});
 
 export const userLogin = loginData => (dispatch) => {
   dispatch(userLoginRequest());
@@ -37,6 +56,21 @@ export const userLogin = loginData => (dispatch) => {
     .catch((error) => {
       const errorMsg = error.message;
       dispatch(userloginFailure(errorMsg));
+    });
+};
+
+export const userRegister = registerData => (dispatch) => {
+  dispatch(userRegisterRequest());
+  Axios.post('/api/user/register', {
+    email: registerData.email,
+    name: registerData.fullName,
+    password: registerData.password
+  })
+    .then((res) => {
+      dispatch(userRegisterSuccess(res.data));
+    })
+    .catch((error) => {
+      dispatch(userRegisterFailure(error.message));
     });
 };
 

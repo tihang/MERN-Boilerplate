@@ -1,6 +1,7 @@
 import {
   USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS,
-  USER_LOGIN_FAILURE, USER_LOGOUT_REQUEST, USER_LOGOUT_SUCCESS
+  USER_LOGIN_FAILURE, USER_LOGOUT_REQUEST, USER_LOGOUT_SUCCESS,
+  USER_REGSITER_REQUEST, USER_REGISTER_SUCCESS, USER_REGISTER_FAILURE
 } from './userTypes';
 
 const initialState = {
@@ -49,6 +50,26 @@ const userReducer = (state = initialState, action) => {
         token: null,
         loggedIn: false,
         sessionData: {}
+      };
+
+    case USER_REGSITER_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case USER_REGISTER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        sessionData: action.payload
+      };
+
+    case USER_REGISTER_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload
       };
 
     default:

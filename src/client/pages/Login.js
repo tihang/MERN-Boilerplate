@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Redirect } from 'react-router-dom';
-import ReactLoading from 'react-loading';
+import { Redirect, NavLink } from 'react-router-dom';
 import { userLogin } from '../redux';
+import LoadingSubmitButton from '../components/LoadingSubmitButton';
 
 function Login({ isLoading, login, loggedIn }) {
   const [email, setEmail] = useState('');
@@ -15,10 +15,12 @@ function Login({ isLoading, login, loggedIn }) {
 
   return (
     <div className="login-page">
-      <h5>Don&apos;t have an account? Register with us.</h5>
-      <button type="button" className="form-btn">
-        Register Now!
-      </button>
+      <h5>Don&apos;t have an account?</h5>
+      <NavLink to="/register">
+        <button type="button" className="form-btn">
+          Register Now!
+        </button>
+      </NavLink>
       <h6>Or Log In</h6>
       <form
         className="form-component"
@@ -43,13 +45,7 @@ function Login({ isLoading, login, loggedIn }) {
         <p className="agreement-notice">
           By clicking &apos;Log In&apos; you agree to our Privacy Notice and Terms & Conditions.
         </p>
-        <button className="form-btn" type="submit">
-          {isLoading ? (
-            <ReactLoading type="spin" color="#00c9a7" height="15%" width="15%" />
-          ) : (
-            'Log In'
-          )}
-        </button>
+        <LoadingSubmitButton isLoading={isLoading} displayText="Log In" />
       </form>
     </div>
   );

@@ -80,9 +80,10 @@ export const userRegister = (registerData, ownProps) => (dispatch) => {
     });
 };
 
-export const userLogout = () => (dispatch) => {
+export const userLogout = ownProps => (dispatch) => {
   dispatch(userLogoutRequest());
   setTimeout(() => {
     dispatch(userLogoutSuccess());
-  }, 200);
+    ownProps.history.push('/login-register');
+  }, 300);
 };

@@ -19,7 +19,7 @@ const options = {
   timeout: 5000,
   offset: '30px',
   // you can also just use 'scale'
-  transition: transitions.SCALE
+  transition: transitions.FADE
 };
 
 export default function App() {
@@ -30,12 +30,14 @@ export default function App() {
           <AlertProvider template={AlertTemplate} {...options}>
             <Router>
               <Nav />
-              <Switch>
-                <Route exact path="/" component={Home} />
-                <Route path="/login-register" component={Login} />
-                <Route path="/register" component={Register} />
-                <Route path="/dashboard" component={Dashboard} />
-              </Switch>
+              <div className="content-area">
+                <Switch>
+                  <Route exact path="/" component={Home} />
+                  <Route exact path="/login-register" component={Login} />
+                  <Route exact path="/register" component={Register} />
+                  <Route exact path="/dashboard" component={Dashboard} />
+                </Switch>
+              </div>
             </Router>
           </AlertProvider>
         </div>

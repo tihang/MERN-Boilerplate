@@ -7,13 +7,13 @@ $secondary-color: #008e9b;
   line-height: 30px;
 }
 
-body {
+// Navigation container
+.nav-container {
+  background-color: black;
+}
+.nav-contents > ul {
   max-width: 1500px;
   margin: auto;
-}
-
-// Navigation container
-.nav-container > ul {
   list-style-type: none;
   height: auto;
   background-color: black;
@@ -60,15 +60,7 @@ body {
 
 // Mobile query
 @media (max-width: 576px) {
-  .nav-container > ul {
-    display: block;
-    li {
-      i {
-        position: absolute;
-        right: 15px;
-        top: 30px;
-      }
-    }
+  .nav-contents > ul {
     .nav-links {
       display: block;
       li {
@@ -85,9 +77,20 @@ body {
         }
       }
     }
+    .btn-wrap {
+      width: 100%;
+    }
 
     .hidden {
       display: none;
+    }
+    display: block;
+    li {
+      i {
+        position: absolute;
+        right: 15px;
+        top: 30px;
+      }
     }
     i {
       display: block;
@@ -101,13 +104,18 @@ body {
   }
 }
 
+.content-area {
+  max-width: 1500px;
+  margin: auto;
+  padding: 40px;
+}
+
 // LOGIN PAGE
 .login-page {
   text-align: center;
   h5 {
-    padding-top: 24px;
     line-height: 1.5em;
-    margin: 20px;
+    margin-bottom: 20px;
   }
   h6 {
     font-family: monospace;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Icon from '../assets/icons/main.png';
@@ -7,7 +7,9 @@ import Icon from '../assets/icons/main.png';
 import { userLogout } from '../redux/index';
 
 function Nav({ loggedIn, logout }) {
-  const [navToggle, setNavToggle] = useState(false);
+  const [navToggle, setNavToggle] = useState(true);
+
+  const history = useHistory();
 
   const toggle = () => {
     setNavToggle(!navToggle);
@@ -33,8 +35,8 @@ function Nav({ loggedIn, logout }) {
   const userNavLinks = () => (
     <ul>
       <li><NavLink activeClassName="current" exact to="/"><img src={Icon} alt="ICON" /></NavLink></li>
+      <li><i onClick={toggle} role="button" tabIndex={0} onKeyDown={toggle} className={navToggle ? 'fas fa-times' : 'fas fa-bars'} /></li>
       <div className={navToggle ? 'nav-links' : 'nav-links hidden'}>
-        <li><i onClick={toggle} role="button" tabIndex={0} onKeyDown={toggle} className={navToggle ? 'fas fa-times' : 'fas fa-bars'} /></li>
         <li>
           <NavLink onClick={toggle} activeClassName="current" exact to="/">Home</NavLink>
         </li>
@@ -42,7 +44,7 @@ function Nav({ loggedIn, logout }) {
           <NavLink onClick={toggle} activeClassName="current" exact to="/dashboard">Dashboard</NavLink>
         </li>
         <li>
-          <button type="button" onClick={logout}>Logout</button>
+          <NavLink onClick={() => { toggle(); logout(); history.push('/login-register'); }} activeClassName="current" exact to="/login-register">Logout</NavLink>
         </li>
       </div>
     </ul>
@@ -51,8 +53,10 @@ function Nav({ loggedIn, logout }) {
 
   return (
     <nav className="nav-container">
-      {/* Show user NavLinks based on their login status */}
-      {loggedIn ? userNavLinks() : guestNavLinks()}
+      <div className="nav-contents">
+        {/* Show user NavLinks based on their login status */}
+        {loggedIn ? userNavLinks() : guestNavLinks()}
+      </div>
     </nav>
   );
 }
@@ -69,9 +73,9 @@ const mapStateToProps = state => ({
   loading: state.user.loading,
 });
 
-const mapDispatchToProps = dispatch => ({
-  logout: () => dispatch(userLogout())
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  logout: () => dispatch(userLogout(ownProps))
 });
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Nav);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Nav));

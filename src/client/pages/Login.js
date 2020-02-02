@@ -35,7 +35,7 @@ function Login({
 
   useEffect(() => {
     if (success.length > 0) {
-      alert.success(success);
+      alert.success('Logged in');
     }
     return () => {
       resetErrAndSscc();

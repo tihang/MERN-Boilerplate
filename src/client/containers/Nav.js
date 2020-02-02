@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -7,16 +7,25 @@ import Icon from '../assets/icons/main.png';
 import { userLogout } from '../redux/index';
 
 function Nav({ loggedIn, logout }) {
+  const [navToggle, setNavToggle] = useState(false);
+
+  const toggle = () => {
+    setNavToggle(!navToggle);
+  };
+
   // NavLinks for non authenticated users
   const guestNavLinks = () => (
     <ul>
       <li><NavLink activeClassName="current" exact to="/"><img src={Icon} alt="ICON" /></NavLink></li>
-      <li>
-        <NavLink activeClassName="current" exact to="/">Home</NavLink>
-      </li>
-      <li>
-        <NavLink activeClassName="current" exact to="/login-register">Login/Register</NavLink>
-      </li>
+      <li><i onClick={toggle} role="button" tabIndex={0} onKeyDown={toggle} className="fa fa-bars" /></li>
+      <div className={navToggle ? 'nav-links' : 'nav-links hidden'}>
+        <li>
+          <NavLink activeClassName="current" exact to="/">Home</NavLink>
+        </li>
+        <li>
+          <NavLink activeClassName="current" exact to="/login-register">Login/Register</NavLink>
+        </li>
+      </div>
     </ul>
   );
 
@@ -24,15 +33,18 @@ function Nav({ loggedIn, logout }) {
   const userNavLinks = () => (
     <ul>
       <li><NavLink activeClassName="current" exact to="/"><img src={Icon} alt="ICON" /></NavLink></li>
-      <li>
-        <NavLink activeClassName="current" exact to="/">Home</NavLink>
-      </li>
-      <li>
-        <NavLink activeClassName="current" exact to="/dashboard">Dashboard</NavLink>
-      </li>
-      <li>
-        <button type="button" onClick={logout}>Logout</button>
-      </li>
+      <div className={navToggle ? 'nav-links' : 'nav-links hidden'}>
+        <li><i onClick={toggle} role="button" tabIndex={0} onKeyDown={toggle} className="fa fa-bars" /></li>
+        <li>
+          <NavLink activeClassName="current" exact to="/">Home</NavLink>
+        </li>
+        <li>
+          <NavLink activeClassName="current" exact to="/dashboard">Dashboard</NavLink>
+        </li>
+        <li>
+          <button type="button" onClick={logout}>Logout</button>
+        </li>
+      </div>
     </ul>
 
   );

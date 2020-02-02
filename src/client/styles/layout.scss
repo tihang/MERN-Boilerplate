@@ -88,18 +88,15 @@ $secondary-color: #008e9b;
     li {
       i {
         position: absolute;
-        right: 15px;
-        top: 30px;
+        right: 0;
+        top: 0;
+        display: block;
+        color: white;
+        padding: 22px;
+        font-size: 2.4rem;
+        cursor: pointer;
+        outline: none;
       }
-    }
-    i {
-      display: block;
-      padding-right: 20px;
-      padding-bottom: 20px;
-      color: white;
-      font-size: 2.4rem;
-      cursor: pointer;
-      outline: none;
     }
   }
 }

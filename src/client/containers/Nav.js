@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import { NavLink, useHistory, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { useAlert } from 'react-alert';
 import Icon from '../assets/icons/main.png';
 
 import { userLogout } from '../redux/index';
 
 function Nav({ loggedIn, logout }) {
-  const [navToggle, setNavToggle] = useState(true);
+  const [navToggle, setNavToggle] = useState(false);
 
   const history = useHistory();
+  const alert = useAlert();
 
   const toggle = () => {
     setNavToggle(!navToggle);
@@ -44,7 +46,7 @@ function Nav({ loggedIn, logout }) {
           <NavLink onClick={toggle} activeClassName="current" exact to="/dashboard">Dashboard</NavLink>
         </li>
         <li>
-          <NavLink onClick={() => { toggle(); logout(); history.push('/login-register'); }} activeClassName="current" exact to="/login-register">Logout</NavLink>
+          <NavLink onClick={() => { toggle(); logout(); alert.success('Logged out'); history.push('/login-register'); }} activeClassName="current" exact to="/login-register">Logout</NavLink>
         </li>
       </div>
     </ul>

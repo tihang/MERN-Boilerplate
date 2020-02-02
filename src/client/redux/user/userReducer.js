@@ -10,7 +10,7 @@ const initialState = {
   token: localStorage.getItem('auth-token'),
   loggedIn: !!localStorage.getItem('auth-token'),
   sessionData: {},
-  success: 'GG',
+  success: '',
   error: '',
 };
 

@@ -17,13 +17,13 @@ function Nav({ loggedIn, logout }) {
   const guestNavLinks = () => (
     <ul>
       <li><NavLink activeClassName="current" exact to="/"><img src={Icon} alt="ICON" /></NavLink></li>
-      <li><i onClick={toggle} role="button" tabIndex={0} onKeyDown={toggle} className="fa fa-bars" /></li>
+      <li><i onClick={toggle} role="button" tabIndex={0} onKeyDown={toggle} className={navToggle ? 'fas fa-times' : 'fas fa-bars'} /></li>
       <div className={navToggle ? 'nav-links' : 'nav-links hidden'}>
         <li>
-          <NavLink activeClassName="current" exact to="/">Home</NavLink>
+          <NavLink onClick={toggle} activeClassName="current" exact to="/">Home</NavLink>
         </li>
         <li>
-          <NavLink activeClassName="current" exact to="/login-register">Login/Register</NavLink>
+          <NavLink onClick={toggle} activeClassName="current" exact to="/login-register">Login/Register</NavLink>
         </li>
       </div>
     </ul>
@@ -34,12 +34,12 @@ function Nav({ loggedIn, logout }) {
     <ul>
       <li><NavLink activeClassName="current" exact to="/"><img src={Icon} alt="ICON" /></NavLink></li>
       <div className={navToggle ? 'nav-links' : 'nav-links hidden'}>
-        <li><i onClick={toggle} role="button" tabIndex={0} onKeyDown={toggle} className="fa fa-bars" /></li>
+        <li><i onClick={toggle} role="button" tabIndex={0} onKeyDown={toggle} className={navToggle ? 'fas fa-times' : 'fas fa-bars'} /></li>
         <li>
-          <NavLink activeClassName="current" exact to="/">Home</NavLink>
+          <NavLink onClick={toggle} activeClassName="current" exact to="/">Home</NavLink>
         </li>
         <li>
-          <NavLink activeClassName="current" exact to="/dashboard">Dashboard</NavLink>
+          <NavLink onClick={toggle} activeClassName="current" exact to="/dashboard">Dashboard</NavLink>
         </li>
         <li>
           <button type="button" onClick={logout}>Logout</button>

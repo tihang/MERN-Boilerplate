@@ -1,5 +1,7 @@
 $btn-color-success: #00c9a7;
-
+$btn-color-success-light: #2ee59d;
+$secondary-color: #008e9b;
+$primary-color: rgb(238, 238, 238);
 h1,
 h2,
 h3,
@@ -90,21 +92,71 @@ input:-webkit-autofill {
   }
 }
 
-.form-btn {
-  background-color: white;
-  border: 1px solid $btn-color-success;
-  width: 260px;
-  height: 60px;
-  padding: 18px;
-  border-radius: 4px;
-  color: $btn-color-success;
-  font-weight: 600;
-  letter-spacing: 2px;
-  display: block;
+// .form-btn {
+//   background-color: white;
+//   border: 1px solid $btn-color-success;
+//   width: 260px;
+//   height: 60px;
+//   padding: 18px;
+//   border-radius: 4px;
+//   color: $btn-color-success;
+//   font-weight: 600;
+//   letter-spacing: 2px;
+//   display: block;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   cursor: pointer;
+//   &:hover {
+//     background-color: #2ee59d;
+//     box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+//     color: #fff;
+//     transform: translateY(-7px);
+//   }
+// }
+
+.btn-wrap {
+  height: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
-  cursor: pointer;
+  justify-content: center;
+
+  .form-btn {
+    width: 150px;
+    height: 60px;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-color: #fff;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid $btn-color-success-light;
+    &:hover {
+      background-color: $btn-color-success;
+      box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+      color: #fff;
+      transform: translateY(-7px);
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .btn-wrap {
+    .form-btn {
+      background-color: $btn-color-success;
+      box-shadow: 0px 5px 10px rgba(46, 229, 157, 0.4);
+      color: #fff;
+    }
+  }
 }
 
 .form-input-error {

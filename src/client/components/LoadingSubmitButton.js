@@ -4,13 +4,15 @@ import PropTypes from 'prop-types';
 
 function LoadingSubmitButton({ isLoading, displayText }) {
   return (
-    <button className="form-btn" type="submit">
-      {isLoading ? (
-        <ReactLoading type="spin" color="#00c9a7" height="15%" width="15%" />
-      )
-        : <React.Fragment>{displayText}</React.Fragment>
+    <div className="btn-wrap">
+      <button className="form-btn" type="submit">
+        {isLoading ? (
+          <ReactLoading type="spin" color="#ffffff" height="15%" width="15%" />
+        )
+          : <React.Fragment>{displayText}</React.Fragment>
       }
-    </button>
+      </button>
+    </div>
   );
 }
 

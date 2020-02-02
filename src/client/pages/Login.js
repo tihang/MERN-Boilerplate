@@ -86,9 +86,7 @@ function Login({
     <div className="login-page">
       <h5>Don&apos;t have an account?</h5>
       <NavLink to="/register">
-        <button type="button" className="form-btn">
-          Register Now!
-        </button>
+        <LoadingSubmitButton displayText="Register" />
       </NavLink>
       <h6>Or Log In</h6>
       <form

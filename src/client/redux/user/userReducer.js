@@ -1,7 +1,8 @@
 import {
+  RESET_ERROR_AND_SUCCESS,
   USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS,
   USER_LOGIN_FAILURE, USER_LOGOUT_REQUEST, USER_LOGOUT_SUCCESS,
-  USER_REGSITER_REQUEST, USER_REGISTER_SUCCESS, USER_REGISTER_FAILURE
+  USER_REGSITER_REQUEST, USER_REGISTER_SUCCESS, USER_REGISTER_FAILURE,
 } from './userTypes';
 
 const initialState = {
@@ -9,11 +10,19 @@ const initialState = {
   token: localStorage.getItem('auth-token'),
   loggedIn: !!localStorage.getItem('auth-token'),
   sessionData: {},
-  error: ''
+  success: 'GG',
+  error: '',
 };
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
+    case RESET_ERROR_AND_SUCCESS:
+      return {
+        ...state,
+        error: '',
+        success: ''
+      };
+
     case USER_LOGIN_REQUEST:
       return {
         ...state,
@@ -25,6 +34,7 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         token: action.payload.token,
+        success: action.payload.email,
         loading: false,
         loggedIn: true,
       };
@@ -62,7 +72,7 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        sessionData: action.payload
+        success: action.payload.message
       };
 
     case USER_REGISTER_FAILURE:

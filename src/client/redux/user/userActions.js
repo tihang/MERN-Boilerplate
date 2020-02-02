@@ -1,5 +1,6 @@
 import Axios from 'axios';
 import {
+  RESET_ERROR_AND_SUCCESS,
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
   USER_LOGIN_FAILURE,
@@ -9,6 +10,10 @@ import {
   USER_REGISTER_SUCCESS,
   USER_REGISTER_FAILURE
 } from './userTypes';
+
+export const resetErrorandSuccess = () => ({
+  type: RESET_ERROR_AND_SUCCESS
+});
 
 export const userLoginRequest = () => ({
   type: USER_LOGIN_REQUEST
@@ -46,20 +51,20 @@ export const userRegisterFailure = error => ({
   payload: error
 });
 
-export const userLogin = loginData => (dispatch) => {
+export const userLogin = (loginData, ownProps) => (dispatch) => {
   dispatch(userLoginRequest());
   Axios.post('/api/user/login', { email: loginData.email, password: loginData.password })
     .then((res) => {
-      const user = res.data;
-      dispatch(userLoginSuccess(user));
+      dispatch(userLoginSuccess(res.data));
+      ownProps.history.push('/dashboard');
     })
     .catch((error) => {
-      const errorMsg = error.message;
-      dispatch(userloginFailure(errorMsg));
+      console.log(error);
+      dispatch(userloginFailure(error.response.data.message));
     });
 };
 
-export const userRegister = registerData => (dispatch) => {
+export const userRegister = (registerData, ownProps) => (dispatch) => {
   dispatch(userRegisterRequest());
   Axios.post('/api/user/register', {
     email: registerData.email,
@@ -68,9 +73,10 @@ export const userRegister = registerData => (dispatch) => {
   })
     .then((res) => {
       dispatch(userRegisterSuccess(res.data));
+      ownProps.history.push('/login-register');
     })
     .catch((error) => {
-      dispatch(userRegisterFailure(error.message));
+      dispatch(userRegisterFailure(error.response.data.message));
     });
 };
 

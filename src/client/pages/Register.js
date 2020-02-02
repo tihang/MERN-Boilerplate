@@ -2,10 +2,15 @@ import React, { useState, useEffect } from 'react';
 import EmailValidator from 'email-validator';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { userRegister } from '../redux/index';
+import { useAlert } from 'react-alert';
+import { Redirect } from 'react-router-dom';
+import { userRegister, resetErrorandSuccess } from '../redux/index';
 import LoadingSubmitButton from '../components/LoadingSubmitButton';
 
-function Register({ isLoading, register }) {
+function Register({
+  error, resetErrAndScss, isLoading, register, success, loggedIn
+}) {
+  // Local state form form variable and validation
   const [userInfo, setUserInfo] = useState({
     email: '',
     fullName: '',
@@ -17,9 +22,27 @@ function Register({ isLoading, register }) {
     }
   });
 
+  // Showing alert message and clearing it from redux store after 4 seconds
+  const alert = useAlert();
+  // Reset error message from store
   useEffect(() => {
-    console.log(userInfo);
-  }, [userInfo]);
+    if (error.length > 0) {
+      alert.error(error);
+    }
+    return () => {
+      resetErrAndScss();
+    };
+  }, [error]);
+
+  // Reset success message from store
+  useEffect(() => {
+    if (success.length > 0) {
+      alert.success(success);
+    }
+    return () => {
+      resetErrAndScss();
+    };
+  }, [success]);
 
   // Form Validation and set it to local state
   const handleChange = (event) => {
@@ -33,11 +56,11 @@ function Register({ isLoading, register }) {
         break;
 
       case 'fullName':
-        errors.fullName = value.length > 5 ? '' : 'Full name must be 5 characters long';
+        errors.fullName = value.length > 5 ? '' : 'Full name must be 6 characters long';
         break;
 
       case 'password':
-        errors.password = value.length > 7 ? '' : 'Password must be 8 characters long';
+        errors.password = value.length > 5 ? '' : 'Password must be 6 characters long';
         break;
 
       default:
@@ -54,8 +77,6 @@ function Register({ isLoading, register }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const { errors } = userInfo;
-
-    // Proceed with registration if no errors
     if (errors.email === '' && errors.fullName === '' && errors.password === '') {
       const userData = {
         email: userInfo.email,
@@ -65,6 +86,11 @@ function Register({ isLoading, register }) {
       register(userData);
     }
   };
+
+  // Redirects if user is logged in
+  if (loggedIn) {
+    return <Redirect to="/dashboard" />;
+  }
 
   return (
     <div className="register-page">
@@ -109,16 +135,24 @@ function Register({ isLoading, register }) {
 }
 
 Register.propTypes = {
+  loggedIn: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  register: PropTypes.func.isRequired
+  register: PropTypes.func.isRequired,
+  error: PropTypes.string.isRequired,
+  resetErrAndScss: PropTypes.func.isRequired,
+  success: PropTypes.string.isRequired
 };
 
 const mapStateToProps = state => ({
-  isLoading: state.user.loading
+  loggedIn: state.user.loggedIn,
+  isLoading: state.user.loading,
+  error: state.user.error,
+  success: state.user.success
 });
 
-const mapDispatchToProps = dispatch => ({
-  register: userData => dispatch(userRegister(userData))
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  resetErrAndScss: () => dispatch(resetErrorandSuccess()),
+  register: userData => dispatch(userRegister(userData, ownProps))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);

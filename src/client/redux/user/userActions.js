@@ -4,11 +4,17 @@ import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
   USER_LOGIN_FAILURE,
+
   USER_LOGOUT_REQUEST,
   USER_LOGOUT_SUCCESS,
+
   USER_REGSITER_REQUEST,
   USER_REGISTER_SUCCESS,
-  USER_REGISTER_FAILURE
+  USER_REGISTER_FAILURE,
+
+  USER_UPLOAD_AVATAR_REQUEST,
+  USER_UPLOAD_AVATAR_SUCCESS,
+  USER_UPLOAD_AVATAR_FAILURE
 } from './userTypes';
 
 export const resetErrorandSuccess = () => ({
@@ -51,6 +57,23 @@ export const userRegisterFailure = error => ({
   payload: error
 });
 
+export const userUploadAvatarRequest = () => ({
+  type: USER_UPLOAD_AVATAR_REQUEST,
+});
+
+export const userUploadAvatarSuccess = user => ({
+  type: USER_UPLOAD_AVATAR_SUCCESS,
+  payload: user
+});
+
+export const userUploadAvatarFailure = error => ({
+  type: USER_UPLOAD_AVATAR_FAILURE,
+  payload: error
+});
+
+
+// THUNK ACTIONS
+
 export const userLogin = (loginData, ownProps) => (dispatch) => {
   dispatch(userLoginRequest());
   Axios.post('/api/user/login', { email: loginData.email, password: loginData.password })
@@ -86,4 +109,18 @@ export const userLogout = ownProps => (dispatch) => {
     dispatch(userLogoutSuccess());
     ownProps.history.push('/login-register');
   }, 300);
+};
+
+export const userUploadAvatar = formData => (dispatch, getState) => {
+  dispatch(userUploadAvatarRequest());
+  Axios.post('/api/profile/avatar/create', formData, {
+    headers: {
+      'Content-type': 'multipart/form-data',
+      'auth-token': getState().user.token
+    }
+  }).then((res) => {
+    dispatch(userUploadAvatarSuccess(res.data));
+  }).catch((error) => {
+    dispatch(userUploadAvatarFailure(error.response.data.message));
+  });
 };

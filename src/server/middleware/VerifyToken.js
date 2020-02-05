@@ -9,6 +9,7 @@ const auth = (req, res, next) => {
     // Verify header token
     const verified = jwt.verify(token, process.env.JWT_TOKEN_SECRET);
     // Assign the user with the verified token object
+    // req.user.user to access the token
     req.user = verified;
     return next();
   } catch (error) {

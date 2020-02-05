@@ -123,4 +123,13 @@ $secondary-color: #008e9b;
   }
 }
 
+.dashboard-page {
+  img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 999px;
+  }
+}
+
 // REGISTER PAGE

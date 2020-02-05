@@ -3,7 +3,6 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const UserValidation = require('../helpers/UserValidation');
-// const { auth } = require('../middleware/VerifyToken');
 
 router.post('/register', async (req, res) => {
   // Validating data using our helper-UserValidation
@@ -55,7 +54,7 @@ router.post('/login', async (req, res) => {
   return res
     .header('auth-token', token)
     .status(200)
-    .send({ token, email: user.email });
+    .send({ token, email: user.email, avatar: user.avatar });
 });
 
 module.exports = router;

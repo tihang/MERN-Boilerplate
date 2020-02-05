@@ -3,12 +3,14 @@ import {
   USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS,
   USER_LOGIN_FAILURE, USER_LOGOUT_REQUEST, USER_LOGOUT_SUCCESS,
   USER_REGSITER_REQUEST, USER_REGISTER_SUCCESS, USER_REGISTER_FAILURE,
+  USER_UPLOAD_AVATAR_REQUEST, USER_UPLOAD_AVATAR_SUCCESS, USER_UPLOAD_AVATAR_FAILURE,
 } from './userTypes';
 
 const initialState = {
   loading: false,
   token: localStorage.getItem('auth-token'),
   loggedIn: !!localStorage.getItem('auth-token'),
+  avatar: '',
   sessionData: {},
   success: '',
   error: '',
@@ -34,6 +36,7 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         token: action.payload.token,
+        avatar: action.payload.avatar,
         success: action.payload.email,
         loading: false,
         loggedIn: true,
@@ -57,6 +60,7 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+        avatar: '',
         token: null,
         loggedIn: false,
         sessionData: {}
@@ -80,6 +84,26 @@ const userReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: action.payload
+      };
+
+    case USER_UPLOAD_AVATAR_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case USER_UPLOAD_AVATAR_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        avatar: action.payload.avatar
+      };
+
+    case USER_UPLOAD_AVATAR_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload.error
       };
 
     default:

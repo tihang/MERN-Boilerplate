@@ -10,6 +10,9 @@ $secondary-color: #008e9b;
 // Navigation container
 .nav-container {
   background-color: black;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 .nav-contents > ul {
   max-width: 1500px;
@@ -58,7 +61,7 @@ $secondary-color: #008e9b;
   }
 }
 
-// Mobile query
+// Mobile nav
 @media (max-width: 576px) {
   .nav-contents > ul {
     .nav-links {
@@ -102,13 +105,11 @@ $secondary-color: #008e9b;
 }
 
 .content-area {
-  max-width: 1500px;
-  margin: auto;
-  padding: 40px;
 }
 
 // LOGIN PAGE
 .login-page {
+  margin-top: 30px;
   text-align: center;
   h5 {
     line-height: 1.5em;
@@ -116,7 +117,7 @@ $secondary-color: #008e9b;
   }
   h6 {
     font-family: monospace;
-    margin: 32px;
+    margin: 40px;
   }
   button {
     margin: auto;
@@ -132,4 +133,37 @@ $secondary-color: #008e9b;
   }
 }
 
+.home-page {
+  position: relative;
+
+  .jumbotron-primary {
+    margin-bottom: -3px;
+    img {
+      width: 100%;
+      height: 100vh;
+      object-fit: cover;
+      position: relative;
+      margin: 0;
+    }
+
+    button {
+      z-index: 100;
+      top: 50%;
+      left: 50%;
+      color: green;
+      width: 200px;
+      position: absolute;
+    }
+  }
+
+  .jumbotron-secondary {
+    margin: auto;
+    img {
+      margin: auto;
+      height: 50vh;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+}
 // REGISTER PAGE

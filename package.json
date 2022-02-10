@@ -35,7 +35,7 @@
     "mongoose": "^5.8.10",
     "multer": "^1.4.2",
     "multer-gridfs-storage": "^4.0.2",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "prop-types": "^15.7.2",
     "react": "^16.5.2",
     "react-alert": "^6.0.0",
